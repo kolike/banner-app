@@ -1,0 +1,102 @@
+/* Frame 7 */
+.layout {
+    /* banner */
+
+position: absolute;
+width: 176px;
+height: 387px;
+left: 1029px;
+top: 167px;
+}
+
+
+.banner{
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+align-items: center;
+padding: 30px 10px 10px;
+gap: 20px;
+
+position: absolute;
+width: 251px;
+height: 357px;
+left: 0px;
+top: 53px;
+
+background: #86D3F4;
+
+}
+
+.buttton {
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 16px;
+gap: 10px;
+
+width: 156px;
+height: 52px;
+
+background: #000000;
+}
+
+.btn-text {
+width: 22px;
+height: 19px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+color: #86D3F4;
+}
+
+.sub-text {
+width: 126px;
+height: 32px;
+
+/* Sub text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+}
+
+.text{
+
+
+/* ИСПОЛНИТЕ МЕЧТУ ВАШЕГО МАЛЫША! ПОДАРИТЕ ЕМУ СОБАКУ! */
+
+width: 231px;
+height: 57px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+color: #000000;
+}

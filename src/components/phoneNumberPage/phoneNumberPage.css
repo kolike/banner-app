@@ -1,0 +1,98 @@
+/* Panels */
+
+.layout{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 40px 24px;
+gap: 13px;
+
+position: absolute;
+width: 380px;
+height: 721px;
+left: 0px;
+top: -1px;
+
+background: #86D3F4;
+}
+
+
+
+.header-text {
+width: 272px;
+height: 60px;
+
+/* Header */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 26px;
+line-height: 30px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+}
+
+.phone-number{
+/* +7(___)___-__-__ */
+
+width: 260px;
+height: 38px;
+
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 38px;
+/* identical to box height */
+display: flex;
+align-items: center;
+text-transform: uppercase;
+
+color: #000000;
+}
+
+
+
+
+.sub-text{
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+}
+
+.numpad{
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 20px 0px;
+gap: 10px;
+
+width: 284px;
+height: 278px;
+}
+
+
+.frame{
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 284px;
+height: 52px;
+
+}
+
