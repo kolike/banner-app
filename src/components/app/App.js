@@ -3,15 +3,18 @@ import WelcomeBanner from "../banner/welcomeBanner";
 import PhoneNumberPage from "../phoneNumberPage/phoneNumberPage";
 import FinnalyPage from "../finallyPage/finnalyPage";
 import VideoComponent from "../videoComponent/videoComponent";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
-      <VideoComponent/>
-      <WelcomeBanner />
-      {/* <PhoneNumberPage /> */}
-      {/* <FinnalyPage/> */}
-    </div>
+    <Router>
+        <VideoComponent/>
+      <Routes>
+        <Route path="/" element={<WelcomeBanner />} />
+        <Route path="/phone" element={<PhoneNumberPage />} />
+        <Route path="/finnaly" element={<FinnalyPage/>} />
+      </Routes>
+    </Router>
   );
 }
 

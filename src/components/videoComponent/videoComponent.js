@@ -3,7 +3,7 @@ import video from './Volvo Trucks - The Epic Split feat. Van Damme (Live Test).m
 const VideoComponent = () => {
     return (
         <>
-        <video className='video' src={video} autoplay loop></video>
+        <video className='video' src={video} autoPlay loop></video>
         </>
     )
 }

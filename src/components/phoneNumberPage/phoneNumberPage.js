@@ -1,4 +1,6 @@
 import "./phoneNumberPage.css";
+import { Link } from 'react-router-dom/';
+
 
 const PhoneNumberPage = () => {
   return (
@@ -9,29 +11,33 @@ const PhoneNumberPage = () => {
         и с Вами свяжется наш менеждер для дальнейшей консультации
       </div>
       <ul className="numpad">
-        <li className="frame">
+        <li className="frame41">
           <button className="btn"><div className="btn__text">1</div></button>
           <button className="btn"><div className="btn__text">2</div></button>
           <button className="btn"><div className="btn__text">3</div></button>
         </li>
-        <li className="frame">
+        <li className="frame41">
           <button className="btn"><div className="btn__text">4</div></button>
           <button className="btn"><div className="btn__text">5</div></button>
           <button className="btn"><div className="btn__text">6</div></button>
         </li>
-        <li className="frame">
+        <li className="frame41">
           <button className="btn"><div className="btn__text">7</div></button>
           <button className="btn"><div className="btn__text">8</div></button>
           <button className="btn"><div className="btn__text">9</div></button>
         </li>
-        <li className="frame">
+        <li className="frame44">
           <button className="btn-delete"><div className="btn__text">Стереть</div></button>
           <button className="btn"><div className="btn__text">0</div></button>
         </li>
+      <li className="frame45">
+      <label className="check-text" htmlFor="confirm">Согласие на обработку персональных данных</label>
+      <input className="check" type="checkbox"></input>
+      </li>
+      <li className="frame44">
+     <Link to='/finnaly'> <button className="confirm-btn" >ПОДТВЕРДИТЬ НОМЕР</button></Link>
+      </li>
       </ul>
-      <label htmlFor="confirm">Согласие на обработку персональных данных</label>
-      <input type="checkbox"></input>
-      <button>ПОДТВЕРДИТЬ НОМЕР</button>
     </div>
   );
 };

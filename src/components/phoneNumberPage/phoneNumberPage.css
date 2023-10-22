@@ -4,7 +4,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 40px 24px;
-gap: 13px;
+gap: 43px;
 
 position: absolute;
 width: 380px;
@@ -16,132 +16,196 @@ background: #86D3F4;
 }
 
 .header-text {
-width: 272px;
-height: 60px;
+        width: 272px;
+        height: 60px;
+    
+        /* Header */
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 26px;
+        line-height: 30px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+    
+        color: #000000;
 
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 26px;
-line-height: 30px;
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #000000;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
 }
 
 .phone-number{
-width: 260px;
-height: 38px;
+/* Tel Number */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
 
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 700;
-font-size: 32px;
-line-height: 38px;
-/* identical to box height */
-display: flex;
-align-items: center;
-text-transform: uppercase;
-
-color: #000000;
+    color: #000000;
 }
-
 .sub-text{
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 16px;
-display: flex;
-align-items: center;
-text-align: center;
+width: 337px;
+    height: 32px;
 
-color: #000000;
+    /* Sub text */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
 }
-
 .numpad{
 display: flex;
-flex-direction: column;
-align-items: center;
-padding: 20px 0px;
-gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0px;
+    gap: 10px;
 
-width: 284px;
-height: 278px;
+    width: 284px;
+    height: 278px;
 }
 
-
-.frame{
+.frame41 {
 display: flex;
-flex-direction: row;
-align-items: center;
-padding: 0px;
-gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
 
-width: 284px;
-height: 52px;
-
+    width: 284px;
+    height: 52px;
 }
 
-.btn {
+.btn{
+/* btn/num/out */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 30px;
+    gap: 10px;
+
+    width: 88px;
+    height: 52px;
+
+    border: 2px solid #000000;
+}
+.btn__text{
+width: 28px;
+    height: 28px;
+
+    /* Text */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #000000;
+}
+
+.frame44 {
+display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+
+    width: 284px;
+    height: 52px;
+}
+.btn-delete {
 box-sizing: border-box;
-flex-direction: row;
-align-items: center;
-padding: 12px 30px;
-gap: 10px;
-display: flex;
-width: 88px;
-height: 52px;
-border: 2px solid #000000;
-    &__text {
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 19px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        text-transform: uppercase;
-        color: #000000;
-    }   
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 39px;
+    gap: 10px;
+
+    width: 186px;
+    height: 52px;
+
+    border: 2px solid #000000;
 }
 
-.btn-delete{
-    /* btn/num-del/out */
-    
-        box-sizing: border-box;
-    
-        /* Auto layout */
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 16px 39px;
-        gap: 10px;
-    
-        width: 186px;
-        height: 52px;
-    
-        border: 2px solid #000000;
-    
-        /* num_btn_text */
-    
-        width: 108px;
-        height: 28px;
-    
-        /* Text */
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 19px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        text-transform: uppercase;
-    
-        color: #000000;
+.frame45 {
+display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
 
+    width: 284px;
+    height: 52px;
+}
+
+.check-text{
+    font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+    
+        color: #565656;
+}
+
+
+.confirm-btn {
+/* btn/fix-size/block */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 19px;
+    gap: 10px;
+
+    width: 284px;
+    height: 52px;
+
+    border: 1px solid #4E4E4E;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 6;
+    flex-grow: 0;
+
+
+    /* Text */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #4E4E4E;
 }
