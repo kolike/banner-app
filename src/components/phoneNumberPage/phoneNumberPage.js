@@ -5,7 +5,6 @@ import { useState, useMemo } from 'react';
 const PhoneNumberPage = () => {
   const [phoneInput, setPhoneInput] = useState('');
 
-  console.log('phoneInput: ', phoneInput);
   const phone = useMemo(() => {
     let result = '+7(___)___-__-__';
     if (!phoneInput) {
