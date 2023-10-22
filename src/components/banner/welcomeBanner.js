@@ -1,7 +1,7 @@
-import "./banner.css";
+import "./welcomeBanner.css";
 import qrCode from "./qr-code.png";
 
-const Banner = () => {
+const WelcomeBanner = () => {
   return (
     <div className="layout">
       <div className="banner">
@@ -17,4 +17,4 @@ const Banner = () => {
     </div>
   );
 };
-export default Banner;
+export default WelcomeBanner;

@@ -10,23 +10,23 @@ const PhoneNumberPage = () => {
       </div>
       <ul className="numpad">
         <li className="frame">
-          <button> 1</button>
-          <button> 2</button>
-          <button> 3</button>
+          <button className="btn"><div className="btn__text">1</div></button>
+          <button className="btn"><div className="btn__text">2</div></button>
+          <button className="btn"><div className="btn__text">3</div></button>
         </li>
         <li className="frame">
-          <button> 4</button>
-          <button> 5</button>
-          <button> 6</button>
+          <button className="btn"><div className="btn__text">4</div></button>
+          <button className="btn"><div className="btn__text">5</div></button>
+          <button className="btn"><div className="btn__text">6</div></button>
         </li>
         <li className="frame">
-          <button> 7</button>
-          <button> 8</button>
-          <button> 9</button>
+          <button className="btn"><div className="btn__text">7</div></button>
+          <button className="btn"><div className="btn__text">8</div></button>
+          <button className="btn"><div className="btn__text">9</div></button>
         </li>
         <li className="frame">
-          <button> Стереть </button>
-          <button> 0</button>
+          <button className="btn-delete"><div className="btn__text">Стереть</div></button>
+          <button className="btn"><div className="btn__text">0</div></button>
         </li>
       </ul>
       <label htmlFor="confirm">Согласие на обработку персональных данных</label>

@@ -1,0 +1,43 @@
+.frame {
+display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 24px;
+    gap: 13px;
+
+    position: absolute;
+    width: 380px;
+    height: 722px;
+    left: 0px;
+    top: -1px;
+
+    background: #86D3F4;
+}
+.header-text{
+width: 284px;
+    height: 76px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000000;
+}
+
+.sub-text{
+width: 284px;
+    height: 32px;
+
+    /* Sub text */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+
+    color: #000000;
+}
