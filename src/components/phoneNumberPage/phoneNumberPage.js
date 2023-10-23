@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 
 const PhoneNumberPage = () => {
   const [phoneInput, setPhoneInput] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
 
   const phone = useMemo(() => {
     let result = '+7(___)___-__-__';
@@ -22,9 +23,41 @@ const PhoneNumberPage = () => {
     }
   };
 
+  const clearNumber = () => {
+    setPhoneInput('');
+  };
+
+  const validation = () => {
+    if (phoneInput.length === 10 && isChecked) {
+      return '/finnaly';
+    } else {
+      return null;
+    }
+  };
+
+  const backspaseNumber = (e) => {
+    if (e.key === 'Backspace') {
+      setPhoneInput(phoneInput.slice(0, -1));
+    } else if (
+      phoneInput.length < 10 &&
+      (e.key === '0' ||
+        e.key === '1' ||
+        e.key === '2' ||
+        e.key === '3' ||
+        e.key === '4' ||
+        e.key === '5' ||
+        e.key === '6' ||
+        e.key === '7' ||
+        e.key === '8' ||
+        e.key === '9')
+    ) {
+      setPhoneInput(phoneInput + e.key);
+    }
+  };
+
   return (
-    <div className="layout">
-      <div className="header-text"> Введите ваш номер мобильного телефона</div>
+    <div className="layout" onKeyDown={backspaseNumber}>
+      <div className="header-text">Введите ваш номер мобильного телефона</div>
       <div className="phone-number">{phone}</div>
       <div className="sub-text">и с Вами свяжется наш менеждер для дальнейшей консультации</div>
       <ul className="numpad">
@@ -62,7 +95,7 @@ const PhoneNumberPage = () => {
           </button>
         </li>
         <li className="frame44">
-          <button className="btn-delete">
+          <button onClick={clearNumber} className="btn-delete">
             <div className="btn__text">Стереть</div>
           </button>
           <button onClick={addNumber} className="btn">
@@ -73,10 +106,15 @@ const PhoneNumberPage = () => {
           <label className="check-text" htmlFor="confirm">
             Согласие на обработку персональных данных
           </label>
-          <input className="check" type="checkbox"></input>
+          <input
+            className="check"
+            type="checkbox"
+            checked={isChecked}
+            onChange={() => setIsChecked((isChecked) => !isChecked)}
+          ></input>
         </li>
         <li className="frame44">
-          <Link to="/finnaly">
+          <Link to={validation()}>
             <button className="confirm-btn">ПОДТВЕРДИТЬ НОМЕР</button>
           </Link>
         </li>
