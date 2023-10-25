@@ -16,18 +16,17 @@ const VideoComponent = () => {
   }, [location.pathname]);
 
   return (
-    <>
-      <video
-        id="video"
-        className="video"
-        src={video}
-        autoPlay={true}
-        loop
-        playsInline
-        muted
-        ref={ref}
-      ></video>
-    </>
+    <video
+      id="video"
+      className="video"
+      src={video}
+      autoPlay={true}
+      loop
+      playsInline
+      muted
+      ref={ref}
+    ></video>
   );
 };
+
 export default VideoComponent;

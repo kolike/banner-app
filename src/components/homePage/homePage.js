@@ -12,6 +12,8 @@ const HomePage = () => {
       clearTimeout(timerId);
     };
   }, []);
-  return <>{isBannerVisible && <WelcomeBanner />}</>;
+
+  return isBannerVisible && <WelcomeBanner />;
 };
+
 export default HomePage;

@@ -16,4 +16,5 @@ const FinnalyPage = () => {
     </>
   );
 };
+
 export default FinnalyPage;
