@@ -23,7 +23,7 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
   const btn12 = useRef();
   const btn13 = useRef();
 
-  const focusBtn = () => {
+  const focusBtn = (sbtn) => {
     switch (selectedButton) {
       case 1:
         btn1.current.focus();
@@ -71,11 +71,31 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
   };
 
   useEffect(() => {
+    console.log('DATA: ', validateData);
+    btn12.current.disabled = true;
+    if (validateData && isChecked) {
+      setNextPage('/finnaly');
+      btn12.current.disabled = false;
+    }
+  }, [isChecked, validateData]);
+
+  useEffect(() => {
+    if (phoneInput.length === 10 && isChecked) {
+      getData();
+    }
     document.addEventListener('keydown', backspaseNumber);
     return () => {
       document.removeEventListener('keydown', backspaseNumber);
     };
-  }, [phoneInput]);
+  }, [phoneInput, isChecked]);
+
+  const getData = async () => {
+    const response = await fetch(
+      `http://apilayer.net/api/validate?access_key=ba9ed546b83b2a39a919b353724fa754&number=7${phoneInput}&country_code=&format=1`,
+    );
+    const data = await response.json();
+    setValidateData(data?.valid);
+  };
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -146,24 +166,6 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
 
   const clearNumber = () => {
     setPhoneInput('');
-  };
-
-  const getData = async () => {
-    const response = await fetch(
-      `http://apilayer.net/api/validate?access_key=ba9ed546b83b2a39a919b353724fa754&number=7${phoneInput}&country_code=&format=1`,
-    );
-    const data = await response.json();
-    setValidateData(data?.valid);
-  };
-
-  const validation = () => {
-    getData();
-    console.log('DATA: ', validateData);
-    if (phoneInput.length === 10 && isChecked && validateData) {
-      setNextPage('/finnaly');
-    } else {
-      return null;
-    }
   };
 
   const backspaseNumber = (e) => {
@@ -254,11 +256,7 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
         </li>
         <li className="frame44">
           <Link to={nextPage}>
-            <button
-              onClick={() => validation()}
-              className={selectedButton === 12 ? 'active' : ''}
-              ref={btn12}
-            >
+            <button className={selectedButton === 12 ? 'active' : ''} ref={btn12}>
               ПОДТВЕРДИТЬ НОМЕР
             </button>
           </Link>
