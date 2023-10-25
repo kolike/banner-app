@@ -2,7 +2,7 @@ import './phoneNumberPage.css';
 import { Link } from 'react-router-dom/';
 import { useState, useMemo, useEffect, useRef } from 'react';
 
-const PhoneNumberPage = ({ setIsPlaying }) => {
+const PhoneNumberPage = () => {
   const [phoneInput, setPhoneInput] = useState('');
   const [isChecked, setIsChecked] = useState(false);
   const [validateData, setValidateData] = useState(false);
@@ -268,11 +268,7 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
         </li>
       </ul>
       <Link to="/">
-        <button
-          className={selectedButton === 13 ? 'active' : ''}
-          ref={btn13}
-          onClick={() => setIsPlaying(true)}
-        >
+        <button className={selectedButton === 13 ? 'active' : ''} ref={btn13}>
           X
         </button>
       </Link>

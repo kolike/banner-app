@@ -1,7 +1,7 @@
 import WelcomeBanner from '../banner/welcomeBanner';
 import { useEffect, useState } from 'react';
 
-const HomePage = ({ setIsPlaying }) => {
+const HomePage = () => {
   const [isBannerVisible, setIsBannerVisible] = useState(false);
 
   useEffect(() => {
@@ -12,6 +12,6 @@ const HomePage = ({ setIsPlaying }) => {
       clearTimeout(timerId);
     };
   }, []);
-  return <>{isBannerVisible && <WelcomeBanner setIsPlaying={setIsPlaying} />}</>;
+  return <>{isBannerVisible && <WelcomeBanner />}</>;
 };
 export default HomePage;

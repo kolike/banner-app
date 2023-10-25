@@ -1,17 +1,19 @@
 import video from './Volvo Trucks - The Epic Split feat. Van Damme (Live Test).mp4';
 
 import { useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-const VideoComponent = ({ setIsPlaying, isPlaying }) => {
+const VideoComponent = () => {
   const ref = useRef(null);
+  const location = useLocation();
 
   useEffect(() => {
-    if (isPlaying) {
+    if (location.pathname === '/') {
       ref.current.play();
     } else {
       ref.current.pause();
     }
-  }, [isPlaying]);
+  }, [location.pathname]);
 
   return (
     <>
@@ -24,8 +26,6 @@ const VideoComponent = ({ setIsPlaying, isPlaying }) => {
         playsInline
         muted
         ref={ref}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
       ></video>
     </>
   );

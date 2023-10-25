@@ -1,7 +1,7 @@
 import './finnalyPage.css';
 import { Link } from 'react-router-dom/';
 
-const FinnalyPage = ({ setIsPlaying }) => {
+const FinnalyPage = () => {
   return (
     <>
       <div className="frame">
@@ -9,7 +9,7 @@ const FinnalyPage = ({ setIsPlaying }) => {
         <div className="sub-text">Держите телефон под рукой. Скоро с Вами свяжется менеджер</div>
       </div>
       <Link to="/">
-        <button onClick={() => setIsPlaying(true)}>
+        <button>
           <p className="btn-text">X</p>
         </button>
       </Link>
