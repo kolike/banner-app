@@ -8,7 +8,6 @@ import { useState } from 'react';
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(true);
-  console.log(isPlaying);
   return (
     <Router>
       <VideoComponent isPlaying={isPlaying} setIsPlaying={setIsPlaying} />

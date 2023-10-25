@@ -5,6 +5,8 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 const PhoneNumberPage = ({ setIsPlaying }) => {
   const [phoneInput, setPhoneInput] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+  const [validateData, setValidateData] = useState(false);
+  const [nextPage, setNextPage] = useState(null);
 
   const [selectedButton, setSelectedButton] = useState(1);
   const btn1 = useRef();
@@ -124,8 +126,6 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
     };
   }, [selectedButton]);
 
-  console.log(selectedButton);
-
   const phone = useMemo(() => {
     let result = '+7(___)___-__-__';
     if (!phoneInput) {
@@ -148,9 +148,19 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
     setPhoneInput('');
   };
 
+  const getData = async () => {
+    const response = await fetch(
+      `http://apilayer.net/api/validate?access_key=ba9ed546b83b2a39a919b353724fa754&number=7${phoneInput}&country_code=&format=1`,
+    );
+    const data = await response.json();
+    setValidateData(data?.valid);
+  };
+
   const validation = () => {
-    if (phoneInput.length === 10 && isChecked) {
-      return '/finnaly';
+    getData();
+    console.log('DATA: ', validateData);
+    if (phoneInput.length === 10 && isChecked && validateData) {
+      setNextPage('/finnaly');
     } else {
       return null;
     }
@@ -243,8 +253,12 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
           ></input>
         </li>
         <li className="frame44">
-          <Link to={validation()}>
-            <button className={selectedButton === 12 ? 'active' : ''} ref={btn12}>
+          <Link to={nextPage}>
+            <button
+              onClick={() => validation()}
+              className={selectedButton === 12 ? 'active' : ''}
+              ref={btn12}
+            >
               ПОДТВЕРДИТЬ НОМЕР
             </button>
           </Link>
