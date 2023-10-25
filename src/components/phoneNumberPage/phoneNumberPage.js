@@ -1,5 +1,5 @@
 import './phoneNumberPage.css';
-import { Link } from 'react-router-dom/';
+import { Link, useNavigate } from 'react-router-dom/';
 import { useState, useMemo, useEffect, useRef } from 'react';
 
 const PhoneNumberPage = () => {
@@ -7,141 +7,109 @@ const PhoneNumberPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [validateData, setValidateData] = useState(false);
   const [nextPage, setNextPage] = useState(null);
-  const [selectedButton, setSelectedButton] = useState(1);
+  const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
+  const [timeWithoutActions, setTimeWithoutActions] = useState(0);
 
-  const btn1 = useRef();
-  const btn2 = useRef();
-  const btn3 = useRef();
-  const btn4 = useRef();
-  const btn5 = useRef();
-  const btn6 = useRef();
-  const btn7 = useRef();
-  const btn8 = useRef();
-  const btn9 = useRef();
-  const btn10 = useRef();
-  const btn11 = useRef();
-  const btn12 = useRef();
-  const btn13 = useRef();
+  const navigate = useNavigate();
 
-  const focusBtn = () => {
-    switch (selectedButton) {
-      case 1:
-        btn1.current.focus();
-        break;
-      case 2:
-        btn2.current.focus();
-        break;
-      case 3:
-        btn3.current.focus();
-        break;
-      case 4:
-        btn4.current.focus();
-        break;
-      case 5:
-        btn5.current.focus();
-        break;
-      case 6:
-        btn6.current.focus();
-        break;
-      case 7:
-        btn7.current.focus();
-        break;
-      case 8:
-        btn8.current.focus();
-        break;
-      case 9:
-        btn9.current.focus();
-        break;
-      case 10:
-        btn10.current.focus();
-        break;
-      case 11:
-        btn11.current.focus();
-        break;
-      case 12:
-        btn12.current.focus();
-        break;
-      case 13:
-        btn13.current.focus();
-        break;
-      default:
-        btn1.current.focus();
-        break;
-    }
-  };
+  const buttonsRef = useRef([]);
 
   useEffect(() => {
-    btn12.current.disabled = true;
-    if (validateData && isChecked) {
-      setNextPage('/finnaly');
-      btn12.current.disabled = false;
-    }
-  }, [isChecked, validateData]);
-
-  useEffect(() => {
-    if (phoneInput.length === 10 && isChecked) {
-      getData();
-    }
-    // eslint-disable-next-line
-  }, [phoneInput, isChecked]);
-
-  useEffect(() => {
-    document.addEventListener('keydown', addKeyboardNumber);
-    return () => {
-      document.removeEventListener('keydown', addKeyboardNumber);
-    };
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    const handleKeyPress = (event) => {
-      if (event.keyCode === 37) {
-        setSelectedButton((prev) => (prev === 1 ? 13 : +prev - 1));
-      } else if (event.keyCode === 39) {
-        setSelectedButton((prev) => (prev === 13 ? 1 : +prev + 1));
-      } else if (event.keyCode === 40) {
-        setSelectedButton((prev) => {
-          if (prev < 7) {
+    const onKeydown = (e) => {
+      if (e.keyCode === 37) {
+        setSelectedButtonIndex((prev) => (prev === 0 ? 12 : prev - 1));
+      } else if (e.keyCode === 39) {
+        setSelectedButtonIndex((prev) => (prev === 12 ? 0 : prev + 1));
+      } else if (e.keyCode === 40) {
+        setSelectedButtonIndex((prev) => {
+          if (prev < 6) {
             return (prev += 3);
-          } else if (prev === 7 || prev === 8) {
+          } else if (prev === 6 || prev === 7) {
+            return 9;
+          } else if (prev === 8) {
             return 10;
-          } else if (prev === 9) {
+          } else if (prev === 9 || prev === 10) {
             return 11;
-          } else if (prev === 10 || prev === 11) {
+          } else if (prev === 11) {
             return 12;
-          } else if (prev === 12) {
-            return 13;
-          } else if (prev >= 13) {
-            return 1;
+          } else if (prev >= 12) {
+            return 0;
           }
         });
-      } else if (event.keyCode === 38) {
-        setSelectedButton((prev) => {
-          if (prev > 13) {
-            return 1;
-          } else if (prev <= 3) {
-            return 13;
-          } else if (prev === 13) {
+      } else if (e.keyCode === 38) {
+        setSelectedButtonIndex((prev) => {
+          if (prev > 12) {
+            return 0;
+          } else if (prev <= 2) {
             return 12;
           } else if (prev === 12) {
             return 11;
           } else if (prev === 11) {
-            return 9;
+            return 10;
           } else if (prev === 10) {
-            return 7;
-          } else if (prev <= 9) {
+            return 8;
+          } else if (prev === 9) {
+            return 6;
+          } else if (prev <= 8) {
             return (prev -= 3);
           }
         });
+      } else if (e.key === 'Backspace') {
+        setPhoneInput((prev) => prev.slice(0, -1));
+      } else if (phoneInput.length < 10 && e.keyCode >= 48 && e.keyCode <= 57) {
+        setPhoneInput((phoneInput) => phoneInput + e.key);
+        setSelectedButtonIndex(e.key === '0' ? 10 : e.key - 1);
+      } else {
+        console.log('неизвестная кнопка');
       }
     };
-    document.addEventListener('keydown', handleKeyPress);
-    focusBtn();
+
+    document.addEventListener('keydown', onKeydown);
     return () => {
-      document.removeEventListener('keydown', handleKeyPress);
+      document.removeEventListener('keydown', onKeydown);
     };
-    // eslint-disable-next-line
-  }, [selectedButton]);
+  }, [phoneInput.length]);
+
+  useEffect(() => {
+    buttonsRef.current[11].disabled = true;
+    if (validateData && isChecked) {
+      setNextPage('/finnaly');
+      buttonsRef.current[11].disabled = false;
+    }
+  }, [isChecked, validateData]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch(
+        `http://apilayer.net/api/validate?access_key=ba9ed546b83b2a39a919b353724fa754&number=7${phoneInput}&country_code=&format=1`,
+      );
+      const data = await response.json();
+      setValidateData(data?.valid);
+    };
+
+    if (phoneInput.length === 10 && isChecked) {
+      getData();
+    }
+  }, [phoneInput, isChecked]);
+
+  useEffect(() => {
+    buttonsRef.current[selectedButtonIndex].focus();
+  }, [buttonsRef, selectedButtonIndex]);
+
+  useEffect(() => {
+    if (timeWithoutActions >= 10) {
+      navigate('/');
+    }
+  }, [timeWithoutActions, navigate]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => setTimeWithoutActions((prev) => prev + 1), 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    setTimeWithoutActions(0);
+  }, [phoneInput, isChecked, selectedButtonIndex]);
 
   const phone = useMemo(() => {
     let result = '+7(___)___-__-__';
@@ -154,47 +122,15 @@ const PhoneNumberPage = () => {
     return result;
   }, [phoneInput]);
 
-  const getData = async () => {
-    const response = await fetch(
-      `http://apilayer.net/api/validate?access_key=ba9ed546b83b2a39a919b353724fa754&number=7${phoneInput}&country_code=&format=1`,
-    );
-    const data = await response.json();
-    setValidateData(data?.valid);
-  };
-
   const addNumber = (e) => {
     if (phoneInput.length < 10) {
-      setPhoneInput(phoneInput + e.target.textContent);
-      setSelectedButton(+e.target.textContent);
+      setPhoneInput((prev) => prev + e.target.textContent);
+      setSelectedButtonIndex(e.target.textContent === '0' ? 10 : e.target.textContent - 1);
     }
   };
 
   const clearNumber = () => {
     setPhoneInput('');
-  };
-
-  const addKeyboardNumber = (e) => {
-    if (e.key === 'Backspace') {
-      setPhoneInput(phoneInput.slice(0, -1));
-    } else if (
-      phoneInput.length < 10 &&
-      (e.key === '0' ||
-        e.key === '1' ||
-        e.key === '2' ||
-        e.key === '3' ||
-        e.key === '4' ||
-        e.key === '5' ||
-        e.key === '6' ||
-        e.key === '7' ||
-        e.key === '8' ||
-        e.key === '9')
-    ) {
-      setPhoneInput((phoneInput) => phoneInput + e.key);
-      setSelectedButton(+e.key);
-    }
-    if (e.key === '0') {
-      setSelectedButton(() => 11);
-    }
   };
 
   return (
@@ -204,47 +140,87 @@ const PhoneNumberPage = () => {
       <div className="sub-text">и с Вами свяжется наш менеждер для дальнейшей консультации</div>
       <ul className="numpad">
         <li className="frame41">
-          <button onClick={addNumber} ref={btn1} className={selectedButton === 1 ? 'active' : ''}>
+          <button
+            onClick={addNumber}
+            ref={(el) => (buttonsRef.current[0] = el)}
+            className={selectedButtonIndex === 0 ? 'active' : ''}
+          >
             1
           </button>
-          <button onClick={addNumber} ref={btn2} className={selectedButton === 2 ? 'active' : ''}>
+          <button
+            onClick={addNumber}
+            ref={(el) => (buttonsRef.current[1] = el)}
+            className={selectedButtonIndex === 1 ? 'active' : ''}
+          >
             2
           </button>
-          <button onClick={addNumber} ref={btn3} className={selectedButton === 3 ? 'active' : ''}>
+          <button
+            onClick={addNumber}
+            ref={(el) => (buttonsRef.current[2] = el)}
+            className={selectedButtonIndex === 2 ? 'active' : ''}
+          >
             3
           </button>
         </li>
         <li className="frame41">
-          <button onClick={addNumber} ref={btn4} className={selectedButton === 4 ? 'active' : ''}>
+          <button
+            onClick={addNumber}
+            ref={(el) => (buttonsRef.current[3] = el)}
+            className={selectedButtonIndex === 3 ? 'active' : ''}
+          >
             4
           </button>
-          <button onClick={addNumber} ref={btn5} className={selectedButton === 5 ? 'active' : ''}>
+          <button
+            onClick={addNumber}
+            ref={(el) => (buttonsRef.current[4] = el)}
+            className={selectedButtonIndex === 4 ? 'active' : ''}
+          >
             5
           </button>
-          <button onClick={addNumber} ref={btn6} className={selectedButton === 6 ? 'active' : ''}>
+          <button
+            onClick={addNumber}
+            ref={(el) => (buttonsRef.current[5] = el)}
+            className={selectedButtonIndex === 5 ? 'active' : ''}
+          >
             6
           </button>
         </li>
         <li className="frame41">
-          <button onClick={addNumber} ref={btn7} className={selectedButton === 7 ? 'active' : ''}>
+          <button
+            onClick={addNumber}
+            ref={(el) => (buttonsRef.current[6] = el)}
+            className={selectedButtonIndex === 6 ? 'active' : ''}
+          >
             7
           </button>
-          <button onClick={addNumber} ref={btn8} className={selectedButton === 8 ? 'active' : ''}>
+          <button
+            onClick={addNumber}
+            ref={(el) => (buttonsRef.current[7] = el)}
+            className={selectedButtonIndex === 7 ? 'active' : ''}
+          >
             8
           </button>
-          <button onClick={addNumber} ref={btn9} className={selectedButton === 9 ? 'active' : ''}>
+          <button
+            onClick={addNumber}
+            ref={(el) => (buttonsRef.current[8] = el)}
+            className={selectedButtonIndex === 8 ? 'active' : ''}
+          >
             9
           </button>
         </li>
         <li className="frame44">
           <button
             onClick={clearNumber}
-            ref={btn10}
-            className={selectedButton === 10 ? 'active' : ''}
+            ref={(el) => (buttonsRef.current[9] = el)}
+            className={selectedButtonIndex === 9 ? 'active' : ''}
           >
             Стереть
           </button>
-          <button onClick={addNumber} ref={btn11} className={selectedButton === 11 ? 'active' : ''}>
+          <button
+            onClick={addNumber}
+            ref={(el) => (buttonsRef.current[10] = el)}
+            className={selectedButtonIndex === 10 ? 'active' : ''}
+          >
             0
           </button>
         </li>
@@ -261,14 +237,20 @@ const PhoneNumberPage = () => {
         </li>
         <li className="frame44">
           <Link to={nextPage}>
-            <button className={selectedButton === 12 ? 'active' : ''} ref={btn12}>
+            <button
+              className={selectedButtonIndex === 11 ? 'active' : ''}
+              ref={(el) => (buttonsRef.current[11] = el)}
+            >
               ПОДТВЕРДИТЬ НОМЕР
             </button>
           </Link>
         </li>
       </ul>
       <Link to="/">
-        <button className={selectedButton === 13 ? 'active' : ''} ref={btn13}>
+        <button
+          className={selectedButtonIndex === 12 ? 'active' : ''}
+          ref={(el) => (buttonsRef.current[12] = el)}
+        >
           X
         </button>
       </Link>
