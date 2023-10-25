@@ -7,8 +7,8 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [validateData, setValidateData] = useState(false);
   const [nextPage, setNextPage] = useState(null);
-
   const [selectedButton, setSelectedButton] = useState(1);
+
   const btn1 = useRef();
   const btn2 = useRef();
   const btn3 = useRef();
@@ -23,7 +23,7 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
   const btn12 = useRef();
   const btn13 = useRef();
 
-  const focusBtn = (sbtn) => {
+  const focusBtn = () => {
     switch (selectedButton) {
       case 1:
         btn1.current.focus();
@@ -71,7 +71,6 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
   };
 
   useEffect(() => {
-    console.log('DATA: ', validateData);
     btn12.current.disabled = true;
     if (validateData && isChecked) {
       setNextPage('/finnaly');
@@ -83,19 +82,16 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
     if (phoneInput.length === 10 && isChecked) {
       getData();
     }
-    document.addEventListener('keydown', backspaseNumber);
-    return () => {
-      document.removeEventListener('keydown', backspaseNumber);
-    };
+    // eslint-disable-next-line
   }, [phoneInput, isChecked]);
 
-  const getData = async () => {
-    const response = await fetch(
-      `http://apilayer.net/api/validate?access_key=ba9ed546b83b2a39a919b353724fa754&number=7${phoneInput}&country_code=&format=1`,
-    );
-    const data = await response.json();
-    setValidateData(data?.valid);
-  };
+  useEffect(() => {
+    document.addEventListener('keydown', addKeyboardNumber);
+    return () => {
+      document.removeEventListener('keydown', addKeyboardNumber);
+    };
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -144,6 +140,7 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
+    // eslint-disable-next-line
   }, [selectedButton]);
 
   const phone = useMemo(() => {
@@ -157,6 +154,14 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
     return result;
   }, [phoneInput]);
 
+  const getData = async () => {
+    const response = await fetch(
+      `http://apilayer.net/api/validate?access_key=ba9ed546b83b2a39a919b353724fa754&number=7${phoneInput}&country_code=&format=1`,
+    );
+    const data = await response.json();
+    setValidateData(data?.valid);
+  };
+
   const addNumber = (e) => {
     if (phoneInput.length < 10) {
       setPhoneInput(phoneInput + e.target.textContent);
@@ -168,7 +173,7 @@ const PhoneNumberPage = ({ setIsPlaying }) => {
     setPhoneInput('');
   };
 
-  const backspaseNumber = (e) => {
+  const addKeyboardNumber = (e) => {
     if (e.key === 'Backspace') {
       setPhoneInput(phoneInput.slice(0, -1));
     } else if (
