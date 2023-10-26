@@ -7,7 +7,7 @@ const HomePage = () => {
   useEffect(() => {
     const timerId = setTimeout(() => {
       setIsBannerVisible(true);
-    }, 5000);
+    }, 1000);
     return () => {
       clearTimeout(timerId);
     };
