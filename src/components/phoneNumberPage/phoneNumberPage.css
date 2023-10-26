@@ -1,0 +1,77 @@
+.phone-page {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.phone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 380px;
+    gap: 13px;
+    background: #86D3F4;
+}
+
+.input-text {
+    font-family: Roboto;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.phone-number {
+    font-family: Roboto;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.sub-text {
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.numpad {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+}
+
+.btn {
+    box-sizing: border-box;
+    border: 2px solid #000000;
+    width: 88px;
+    height: 55px;
+    color: #000000;
+}
+
+.btn-clear {
+    box-sizing: border-box;
+    border: 2px solid #000000;
+    width: 186px;
+    height: 55px;
+}
+
+.active {
+    background: black;
+    color: white;
+}

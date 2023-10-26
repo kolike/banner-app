@@ -98,7 +98,7 @@ const PhoneNumberPage = () => {
 
   useEffect(() => {
     if (timeWithoutActions >= 10) {
-      navigate('/');
+      //navigate('/');
     }
   }, [timeWithoutActions, navigate]);
 
@@ -134,126 +134,128 @@ const PhoneNumberPage = () => {
   };
 
   return (
-    <div className="layout">
-      <div className="header-text">Введите ваш номер мобильного телефона</div>
-      <div className="phone-number">{phone}</div>
-      <div className="sub-text">и с Вами свяжется наш менеждер для дальнейшей консультации</div>
-      <ul className="numpad">
-        <li className="frame41">
+    <div className="phone-page">
+      <div className="phone">
+        <Link to="/">
           <button
-            onClick={addNumber}
-            ref={(el) => (buttonsRef.current[0] = el)}
-            className={selectedButtonIndex === 0 ? 'active' : ''}
+            className={selectedButtonIndex === 12 ? 'btn active' : 'btn'}
+            ref={(el) => (buttonsRef.current[12] = el)}
           >
-            1
+            X
           </button>
-          <button
-            onClick={addNumber}
-            ref={(el) => (buttonsRef.current[1] = el)}
-            className={selectedButtonIndex === 1 ? 'active' : ''}
-          >
-            2
-          </button>
-          <button
-            onClick={addNumber}
-            ref={(el) => (buttonsRef.current[2] = el)}
-            className={selectedButtonIndex === 2 ? 'active' : ''}
-          >
-            3
-          </button>
-        </li>
-        <li className="frame41">
-          <button
-            onClick={addNumber}
-            ref={(el) => (buttonsRef.current[3] = el)}
-            className={selectedButtonIndex === 3 ? 'active' : ''}
-          >
-            4
-          </button>
-          <button
-            onClick={addNumber}
-            ref={(el) => (buttonsRef.current[4] = el)}
-            className={selectedButtonIndex === 4 ? 'active' : ''}
-          >
-            5
-          </button>
-          <button
-            onClick={addNumber}
-            ref={(el) => (buttonsRef.current[5] = el)}
-            className={selectedButtonIndex === 5 ? 'active' : ''}
-          >
-            6
-          </button>
-        </li>
-        <li className="frame41">
-          <button
-            onClick={addNumber}
-            ref={(el) => (buttonsRef.current[6] = el)}
-            className={selectedButtonIndex === 6 ? 'active' : ''}
-          >
-            7
-          </button>
-          <button
-            onClick={addNumber}
-            ref={(el) => (buttonsRef.current[7] = el)}
-            className={selectedButtonIndex === 7 ? 'active' : ''}
-          >
-            8
-          </button>
-          <button
-            onClick={addNumber}
-            ref={(el) => (buttonsRef.current[8] = el)}
-            className={selectedButtonIndex === 8 ? 'active' : ''}
-          >
-            9
-          </button>
-        </li>
-        <li className="frame44">
-          <button
-            onClick={clearNumber}
-            ref={(el) => (buttonsRef.current[9] = el)}
-            className={selectedButtonIndex === 9 ? 'active' : ''}
-          >
-            Стереть
-          </button>
-          <button
-            onClick={addNumber}
-            ref={(el) => (buttonsRef.current[10] = el)}
-            className={selectedButtonIndex === 10 ? 'active' : ''}
-          >
-            0
-          </button>
-        </li>
-        <li className="frame45">
-          <label className="check-text" htmlFor="confirm">
-            Согласие на обработку персональных данных
-          </label>
-          <input
-            className="check"
-            type="checkbox"
-            checked={isChecked}
-            onChange={() => setIsChecked((isChecked) => !isChecked)}
-          ></input>
-        </li>
-        <li className="frame44">
-          <Link to={nextPage}>
+        </Link>
+        <div className="input-text">Введите ваш номер мобильного телефона</div>
+        <div className="phone-number">{phone}</div>
+        <div className="sub-text">и с Вами свяжется наш менеждер для дальнейшей консультации</div>
+        <ul className="numpad">
+          <li className="row">
             <button
-              className={selectedButtonIndex === 11 ? 'active' : ''}
-              ref={(el) => (buttonsRef.current[11] = el)}
+              onClick={addNumber}
+              ref={(el) => (buttonsRef.current[0] = el)}
+              className={selectedButtonIndex === 0 ? 'btn active' : 'btn'}
             >
-              ПОДТВЕРДИТЬ НОМЕР
+              1
             </button>
-          </Link>
-        </li>
-      </ul>
-      <Link to="/">
-        <button
-          className={selectedButtonIndex === 12 ? 'active' : ''}
-          ref={(el) => (buttonsRef.current[12] = el)}
-        >
-          X
-        </button>
-      </Link>
+            <button
+              onClick={addNumber}
+              ref={(el) => (buttonsRef.current[1] = el)}
+              className={selectedButtonIndex === 1 ? 'btn active' : 'btn'}
+            >
+              2
+            </button>
+            <button
+              onClick={addNumber}
+              ref={(el) => (buttonsRef.current[2] = el)}
+              className={selectedButtonIndex === 2 ? 'btn active' : 'btn'}
+            >
+              3
+            </button>
+          </li>
+          <li className="row">
+            <button
+              onClick={addNumber}
+              ref={(el) => (buttonsRef.current[3] = el)}
+              className={selectedButtonIndex === 3 ? 'btn active' : 'btn'}
+            >
+              4
+            </button>
+            <button
+              onClick={addNumber}
+              ref={(el) => (buttonsRef.current[4] = el)}
+              className={selectedButtonIndex === 4 ? 'btn active' : 'btn'}
+            >
+              5
+            </button>
+            <button
+              onClick={addNumber}
+              ref={(el) => (buttonsRef.current[5] = el)}
+              className={selectedButtonIndex === 5 ? 'btn active' : 'btn'}
+            >
+              6
+            </button>
+          </li>
+          <li className="row">
+            <button
+              onClick={addNumber}
+              ref={(el) => (buttonsRef.current[6] = el)}
+              className={selectedButtonIndex === 6 ? 'btn active' : 'btn'}
+            >
+              7
+            </button>
+            <button
+              onClick={addNumber}
+              ref={(el) => (buttonsRef.current[7] = el)}
+              className={selectedButtonIndex === 7 ? 'btn active' : 'btn'}
+            >
+              8
+            </button>
+            <button
+              onClick={addNumber}
+              ref={(el) => (buttonsRef.current[8] = el)}
+              className={selectedButtonIndex === 8 ? 'btn active' : 'btn'}
+            >
+              9
+            </button>
+          </li>
+          <li className="row">
+            <button
+              onClick={clearNumber}
+              ref={(el) => (buttonsRef.current[9] = el)}
+              className={selectedButtonIndex === 9 ? 'btn-clear active' : 'btn-clear'}
+            >
+              Стереть
+            </button>
+            <button
+              onClick={addNumber}
+              ref={(el) => (buttonsRef.current[10] = el)}
+              className={selectedButtonIndex === 10 ? 'btn active' : 'btn'}
+            >
+              0
+            </button>
+          </li>
+          <li className="frame45">
+            <label className="check-text" htmlFor="confirm">
+              Согласие на обработку персональных данных
+            </label>
+            <input
+              className="check"
+              type="checkbox"
+              checked={isChecked}
+              onChange={() => setIsChecked((isChecked) => !isChecked)}
+            ></input>
+          </li>
+          <li className="frame44">
+            <Link to={nextPage}>
+              <button
+                className={selectedButtonIndex === 11 ? 'btn active' : 'btn'}
+                ref={(el) => (buttonsRef.current[11] = el)}
+              >
+                ПОДТВЕРДИТЬ НОМЕР
+              </button>
+            </Link>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

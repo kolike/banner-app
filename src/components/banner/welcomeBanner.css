@@ -1,15 +1,12 @@
-.banner {
-    position: relative;
-    z-index: 1;
+.welcome-page {
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    width: 1280px;
-    height: 720px;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.screen {
+.welcome-banner {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,21 +17,20 @@
     background: #86D3F4;
 }
 
-.qr-code {
+.welcome-qr-code {
     width: 126px;
     height: 126px
 }
 
-.text-on-top {
+.welcome-text-on-top {
     font-family: Roboto;
     font-size: 16px;
-    font-weight: 500;
     line-height: 19px;
     letter-spacing: 0em;
     text-align: center;
 }
 
-.text-on-bottom {
+.welcome-text-on-bottom {
     margin-right: 50px;
     margin-left: 50px;
     font-family: Roboto;
@@ -45,18 +41,14 @@
     text-align: center;
 }
 
-.btn-ok {
+.welcome-btn-ok {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 156px;
     height: 52px;
     padding: 16px;
     background: black;
-}
-
-.btn-text {
     font-family: Roboto;
     font-size: 16px;
     font-weight: 500;
