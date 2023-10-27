@@ -36,15 +36,15 @@
 }
 
 .finnaly-btn-close {
-    position: absolute;
+    position: relative;
     top: 20px;
-    right: 20px;
+    left: 790px;
 }
 
 .finnaly-qr-code {
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
+    position: relative;
+    top: 570px;
+    left: 460px;
     width: 314px;
     height: 110px;
 }

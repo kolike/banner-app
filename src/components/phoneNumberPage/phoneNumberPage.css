@@ -1,12 +1,14 @@
-.phone-page {
+.phonepage {
     position: relative;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: stretch;
+    width: 100%;
+    height: 100%;
 }
 
-.phone {
+.phonepage-phone {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,7 +18,7 @@
     background: #86D3F4;
 }
 
-.input-text {
+.phonepage-input-text {
     font-family: Roboto;
     font-size: 26px;
     font-weight: 400;
@@ -25,7 +27,7 @@
     text-align: center;
 }
 
-.phone-number {
+.phonepage-phone-number {
     font-family: Roboto;
     font-size: 32px;
     font-weight: 700;
@@ -34,7 +36,17 @@
     text-align: left;
 }
 
-.sub-text {
+.phonepage-wrong-phone-number {
+    color: red;
+    font-family: Roboto;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.phonepage-sub-text {
     font-family: Roboto;
     font-size: 14px;
     font-weight: 400;
@@ -43,35 +55,107 @@
     text-align: center;
 }
 
-.numpad {
+.phonepage-numpad {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.row {
+.phonepage-row {
     display: flex;
     flex-direction: row;
     gap: 10px;
-
 }
 
-.btn {
+.phonepage-btn {
     box-sizing: border-box;
     border: 2px solid #000000;
     width: 88px;
-    height: 55px;
-    color: #000000;
+    height: 52px;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    background: #86D3F4;
 }
 
-.btn-clear {
+.phonepage-btn-clear {
     box-sizing: border-box;
     border: 2px solid #000000;
     width: 186px;
     height: 55px;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    background: #86D3F4;
+}
+
+.phonepage-btn-confirm {
+    box-sizing: border-box;
+    width: 284px;
+    height: 52px;
+    border: 2px solid black;
+    color: black;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    background: #86D3F4;
+}
+
+
+.phonepage-btn-confirm-active:disabled {
+    box-sizing: border-box;
+    width: 284px;
+    height: 52px;
+    border: 2px solid #4E4E4E;
+    color: #4E4E4E;
+    background: #78939e;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.phonepage-btn-confirm-active {
+    box-sizing: border-box;
+    width: 284px;
+    height: 52px;
+    border: 2px solid black;
+    color: white;
+    background: black;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
 }
 
 .active {
     background: black;
     color: white;
+}
+
+.phonepage-close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.phonepage-qr-code {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    width: 314px;
+    height: 110px;
 }
