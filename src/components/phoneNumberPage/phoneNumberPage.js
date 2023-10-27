@@ -60,7 +60,7 @@ const PhoneNumberPage = () => {
         buttonsRef.current[11].disabled = true;
       } else if (
         phoneInput.length < 10 &&
-        ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 97 && e.keyCode <= 105))
+        ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105))
       ) {
         setIsWrongNumber(false);
         setPhoneInput((phoneInput) => phoneInput + e.key);
@@ -87,10 +87,11 @@ const PhoneNumberPage = () => {
   useEffect(() => {
     const getData = async () => {
       const response = await fetch(
-        `https://apilayer.net/api/validate?access_key=ba9ed546b83b2a39a919b353724fa754&number=7${phoneInput}&country_code=&format=1`,
+        `
+https://api-bdc.net/data/phone-number-validate?number=+7${phoneInput}&countryCode=ru&localityLanguage=en&key=bdc_613e9ba1234943c089fa3977d47493ba`,
       );
       const data = await response.json();
-      setValidateData(data?.valid);
+      setValidateData(data?.isValid);
     };
 
     if (phoneInput.length === 10 && isChecked) {
@@ -113,7 +114,7 @@ const PhoneNumberPage = () => {
 
   useEffect(() => {
     if (timeWithoutActions >= 10) {
-      navigate('/');
+      //   navigate('/');
     }
   }, [timeWithoutActions, navigate]);
 

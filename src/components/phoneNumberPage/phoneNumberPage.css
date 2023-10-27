@@ -110,6 +110,20 @@
     background: #86D3F4;
 }
 
+.phonepage-btn-confirm:disabled {
+    box-sizing: border-box;
+    width: 284px;
+    height: 52px;
+    border: 2px solid #4E4E4E;
+    color: #4E4E4E;
+    background: #86D3F4;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+}
 
 .phonepage-btn-confirm-active:disabled {
     box-sizing: border-box;
