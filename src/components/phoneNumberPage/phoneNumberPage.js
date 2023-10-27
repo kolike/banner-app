@@ -10,6 +10,7 @@ const PhoneNumberPage = () => {
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   const [timeWithoutActions, setTimeWithoutActions] = useState(0);
   const [isWrongNumber, setIsWrongNumber] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -86,11 +87,13 @@ const PhoneNumberPage = () => {
 
   useEffect(() => {
     const getData = async () => {
+      setLoading(true);
       const response = await fetch(
         `
 https://api-bdc.net/data/phone-number-validate?number=+7${phoneInput}&countryCode=ru&localityLanguage=en&key=bdc_613e9ba1234943c089fa3977d47493ba`,
       );
       const data = await response.json();
+      setLoading(false);
       setValidateData(data?.isValid);
     };
 
@@ -114,7 +117,7 @@ https://api-bdc.net/data/phone-number-validate?number=+7${phoneInput}&countryCod
 
   useEffect(() => {
     if (timeWithoutActions >= 10) {
-      //   navigate('/');
+      navigate('/');
     }
   }, [timeWithoutActions, navigate]);
 
@@ -164,7 +167,15 @@ https://api-bdc.net/data/phone-number-validate?number=+7${phoneInput}&countryCod
         </Link>
         <img className="phonepage-qr-code" src="/qr-code.svg" alt="qr-code" />
         <div className="phonepage-input-text">Введите ваш номер мобильного телефона</div>
-        <div className={isWrongNumber ? 'phonepage-wrong-phone-number' : 'phonepage-phone-number'}>
+        <div
+          className={
+            loading
+              ? 'phonepage-phone-number'
+              : isWrongNumber
+              ? 'phonepage-wrong-phone-number'
+              : 'phonepage-phone-number'
+          }
+        >
           {phone}
         </div>
         <div className="phonepage-sub-text">
@@ -258,10 +269,13 @@ https://api-bdc.net/data/phone-number-validate?number=+7${phoneInput}&countryCod
               0
             </button>
           </li>
-          <li className="phonepage-row">
+          <li className="phonepage-row-img">
             <img
+              className="checkbox-img"
               src={
-                isWrongNumber
+                loading
+                  ? '/spinner.svg'
+                  : isWrongNumber
                   ? '/wrong-number-icon.svg'
                   : isChecked
                   ? '/checkbox-panel-verified.svg'

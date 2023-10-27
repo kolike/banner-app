@@ -28,6 +28,7 @@
     line-height: 19px;
     letter-spacing: 0em;
     text-align: center;
+    padding: 10px;
 }
 
 .welcome-text-on-bottom {
@@ -42,6 +43,7 @@
 }
 
 .welcome-btn-ok {
+    border: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: center;
