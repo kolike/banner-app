@@ -5,7 +5,7 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 const PhoneNumberPage = () => {
   const [phoneInput, setPhoneInput] = useState('');
   const [isChecked, setIsChecked] = useState(false);
-  const [validateData, setValidateData] = useState(false);
+  const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
   const [nextPage, setNextPage] = useState(null);
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   const [timeWithoutActions, setTimeWithoutActions] = useState(0);
@@ -31,6 +31,9 @@ const PhoneNumberPage = () => {
           } else if (prev === 8) {
             return 10;
           } else if (prev === 9 || prev === 10) {
+            if (buttonsRef.current[11].disabled) {
+              return 12;
+            }
             return 11;
           } else if (prev === 11) {
             return 12;
@@ -45,6 +48,9 @@ const PhoneNumberPage = () => {
           } else if (prev <= 2) {
             return 12;
           } else if (prev === 12) {
+            if (buttonsRef.current[11].disabled) {
+              return 10;
+            }
             return 11;
           } else if (prev === 11) {
             return 10;
@@ -66,8 +72,6 @@ const PhoneNumberPage = () => {
         setIsWrongNumber(false);
         setPhoneInput((phoneInput) => phoneInput + e.key);
         setSelectedButtonIndex(e.key === '0' ? 10 : e.key - 1);
-      } else {
-        console.log('неизвестная кнопка');
       }
     };
 
@@ -79,11 +83,11 @@ const PhoneNumberPage = () => {
 
   useEffect(() => {
     buttonsRef.current[11].disabled = true;
-    if (validateData && isChecked) {
+    if (isPhoneNumberValid && isChecked) {
       setNextPage('/finnaly');
       buttonsRef.current[11].disabled = false;
     }
-  }, [isChecked, validateData]);
+  }, [isChecked, isPhoneNumberValid]);
 
   useEffect(() => {
     const getData = async () => {
@@ -94,7 +98,7 @@ https://api-bdc.net/data/phone-number-validate?number=+7${phoneInput}&countryCod
       );
       const data = await response.json();
       setLoading(false);
-      setValidateData(data?.isValid);
+      setIsPhoneNumberValid(data?.isValid);
     };
 
     if (phoneInput.length === 10 && isChecked) {
@@ -104,12 +108,12 @@ https://api-bdc.net/data/phone-number-validate?number=+7${phoneInput}&countryCod
   }, [phoneInput, isChecked]);
 
   useEffect(() => {
-    if (phoneInput.length === 10 && !validateData && isChecked) {
+    if (phoneInput.length === 10 && !isPhoneNumberValid && isChecked) {
       setIsWrongNumber(true);
     } else {
       setIsWrongNumber(false);
     }
-  }, [phoneInput, validateData, isChecked]);
+  }, [phoneInput, isPhoneNumberValid, isChecked]);
 
   useEffect(() => {
     buttonsRef.current[selectedButtonIndex].focus();
@@ -155,151 +159,134 @@ https://api-bdc.net/data/phone-number-validate?number=+7${phoneInput}&countryCod
   };
 
   return (
-    <div className="phonepage">
-      <div className="phonepage-phone">
-        <Link to="/">
+    <div className="phone-page">
+      <div className="phone-page-banner">
+        <button
+          className="phone-page-close-btn"
+          onClick={() => navigate('/')}
+          ref={(el) => (buttonsRef.current[12] = el)}
+        >
           <img
-            className="phonepage-close-button"
             src={selectedButtonIndex === 12 ? 'close-icon.svg' : '/close-icon-white.svg'}
-            ref={(el) => (buttonsRef.current[12] = el)}
             alt="close-icon"
           ></img>
-        </Link>
-        <img className="phonepage-qr-code" src="/qr-code.svg" alt="qr-code" />
-        <div className="phonepage-input-text">Введите ваш номер мобильного телефона</div>
+        </button>
+        <img className="phone-page-qr-code" src="/qr-code.svg" alt="qr-code" />
+        <div className="phone-page-input-text">Введите ваш номер мобильного телефона</div>
         <div
           className={
-            loading
-              ? 'phonepage-phone-number'
-              : isWrongNumber
-              ? 'phonepage-wrong-phone-number'
-              : 'phonepage-phone-number'
+            'phone-page-phone-number' +
+            (!loading && isWrongNumber ? ' phone-page-wrong-phone-number' : '')
           }
         >
           {phone}
         </div>
-        <div className="phonepage-sub-text">
-          и с Вами свяжется наш менеждер для дальнейшей консультации
+        <div className="phone-page-sub-text">
+          и с Вами свяжется наш менеждер для <br /> дальнейшей консультации
         </div>
-        <ul className="phonepage-numpad">
-          <li className="phonepage-row">
+        <div className="phone-page-numpad">
+          <div className="phone-page-row">
             <button
               onClick={addNumber}
               ref={(el) => (buttonsRef.current[0] = el)}
-              className={selectedButtonIndex === 0 ? 'phonepage-btn active' : 'phonepage-btn'}
+              className="phone-page-number-btn"
             >
               1
             </button>
             <button
               onClick={addNumber}
               ref={(el) => (buttonsRef.current[1] = el)}
-              className={selectedButtonIndex === 1 ? 'phonepage-btn active' : 'phonepage-btn'}
+              className="phone-page-number-btn"
             >
               2
             </button>
             <button
               onClick={addNumber}
               ref={(el) => (buttonsRef.current[2] = el)}
-              className={selectedButtonIndex === 2 ? 'phonepage-btn active' : 'phonepage-btn'}
+              className="phone-page-number-btn"
             >
               3
             </button>
-          </li>
-          <li className="phonepage-row">
+          </div>
+          <div className="phone-page-row">
             <button
               onClick={addNumber}
               ref={(el) => (buttonsRef.current[3] = el)}
-              className={selectedButtonIndex === 3 ? 'phonepage-btn active' : 'phonepage-btn'}
+              className="phone-page-number-btn"
             >
               4
             </button>
             <button
               onClick={addNumber}
               ref={(el) => (buttonsRef.current[4] = el)}
-              className={selectedButtonIndex === 4 ? 'phonepage-btn active' : 'phonepage-btn'}
+              className="phone-page-number-btn"
             >
               5
             </button>
             <button
               onClick={addNumber}
               ref={(el) => (buttonsRef.current[5] = el)}
-              className={selectedButtonIndex === 5 ? 'phonepage-btn active' : 'phonepage-btn'}
+              className="phone-page-number-btn"
             >
               6
             </button>
-          </li>
-          <li className="phonepage-row">
+          </div>
+          <div className="phone-page-row">
             <button
               onClick={addNumber}
               ref={(el) => (buttonsRef.current[6] = el)}
-              className={selectedButtonIndex === 6 ? 'phonepage-btn active' : 'phonepage-btn'}
+              className="phone-page-number-btn"
             >
               7
             </button>
             <button
               onClick={addNumber}
               ref={(el) => (buttonsRef.current[7] = el)}
-              className={selectedButtonIndex === 7 ? 'phonepage-btn active' : 'phonepage-btn'}
+              className="phone-page-number-btn"
             >
               8
             </button>
             <button
               onClick={addNumber}
               ref={(el) => (buttonsRef.current[8] = el)}
-              className={selectedButtonIndex === 8 ? 'phonepage-btn active' : 'phonepage-btn'}
+              className="phone-page-number-btn"
             >
               9
             </button>
-          </li>
-          <li className="phonepage-row">
+          </div>
+          <div className="phone-page-row">
             <button
               onClick={clearNumber}
               ref={(el) => (buttonsRef.current[9] = el)}
-              className={
-                selectedButtonIndex === 9 ? 'phonepage-btn-clear active' : 'phonepage-btn-clear'
-              }
+              className="phone-page-clear-btn"
             >
               Стереть
             </button>
             <button
               onClick={addNumber}
               ref={(el) => (buttonsRef.current[10] = el)}
-              className={selectedButtonIndex === 10 ? 'phonepage-btn active' : 'phonepage-btn'}
+              className="phone-page-number-btn"
             >
               0
             </button>
-          </li>
-          <li className="phonepage-row-img">
-            <img
-              className="checkbox-img"
-              src={
-                loading
-                  ? '/spinner.svg'
-                  : isWrongNumber
-                  ? '/wrong-number-icon.svg'
-                  : isChecked
-                  ? '/checkbox-panel-verified.svg'
-                  : '/checkbox-panel-not-verified.svg'
-              }
-              onClick={() => setIsChecked((prev) => !prev)}
-              alt="checkbox"
-            />
-          </li>
-          <li className="phonepage-row">
-            <Link to={nextPage}>
-              <button
-                className={
-                  selectedButtonIndex === 11
-                    ? 'phonepage-btn-confirm-active'
-                    : 'phonepage-btn-confirm'
-                }
-                ref={(el) => (buttonsRef.current[11] = el)}
-              >
-                ПОДТВЕРДИТЬ НОМЕР
-              </button>
-            </Link>
-          </li>
-        </ul>
+          </div>
+        </div>
+        {loading && <img src="/spinner.svg" alt="spinner" className="phone-page-spinner" />}
+        {!loading && isWrongNumber && <img src="/wrong-number-icon.svg" alt="wrong number img" />}
+        {!loading && !isWrongNumber && (
+          <img
+            src={isChecked ? '/checkbox-panel-verified.svg' : '/checkbox-panel-not-verified.svg'}
+            onClick={() => setIsChecked((prev) => !prev)}
+            alt="checkbox"
+          />
+        )}
+        <div className="phone-page-row">
+          <Link to={nextPage}>
+            <button className="phone-page-confirm-btn" ref={(el) => (buttonsRef.current[11] = el)}>
+              ПОДТВЕРДИТЬ НОМЕР
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

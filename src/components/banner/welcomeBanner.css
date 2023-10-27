@@ -15,6 +15,7 @@
     height: 357px;
     gap: 20px;
     background: #86D3F4;
+    padding-bottom: 5px;
 }
 
 .welcome-qr-code {
