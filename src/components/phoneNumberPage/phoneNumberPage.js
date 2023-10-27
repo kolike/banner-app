@@ -87,7 +87,7 @@ const PhoneNumberPage = () => {
   useEffect(() => {
     const getData = async () => {
       const response = await fetch(
-        `http://apilayer.net/api/validate?access_key=ba9ed546b83b2a39a919b353724fa754&number=7${phoneInput}&country_code=&format=1`,
+        `https://apilayer.net/api/validate?access_key=ba9ed546b83b2a39a919b353724fa754&number=7${phoneInput}&country_code=&format=1`,
       );
       const data = await response.json();
       setValidateData(data?.valid);
